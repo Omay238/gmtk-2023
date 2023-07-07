@@ -1,14 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-        <script src="./libraries/p5.min.js"></script>
-        <script src="./libraries/p5.sound.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <meta charset="utf-8" />
         <title>Roles Reversed</title>
+        <style media="screen">
+            #editor {
+                position: absolute;
+                top: 0;
+                right: 50vw;
+                bottom: 0;
+                left: 0;
+            }
+
+            #game {
+                position: absolute;
+                top: 10vh;
+                right: 0;
+                bottom: 40vh;
+                left: 50vw;
+                width: 50vw;
+                height: 60vh;
+            }
+
+            #bar {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 90vh;
+                left: 50vw;
+                background: forestgreen;
+                color: white;
+                font-family: sans-serif;
+
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+            }
+
+            #bar>h1 {
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            #bar:hover {
+                background: darkgreen;
+                color: lightgray;
+            }
+
+            #console {
+                position: absolute;
+                top: 70vh;
+                right: 0;
+                bottom: 0;
+                left: 50vw;
+            }
+        </style>
     </head>
+
     <body>
-        <main></main>
-        <script src="sketch.js"></script>
+    <div id="left">
+        <div id="editor"></div>
+    </div>
+    <div id="right">
+        <div id="bar">
+            <h1>Run</h1>
+        </div>
+        <iframe id="game"></iframe>
+        <div id="console"></div>
+    </div>
+    <script src="./libraries/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="script.js" type="module"></script>
     </body>
 </html>
