@@ -11,9 +11,16 @@
     <link rel="stylesheet" href="./styles/p5.css">
   </head>
   <body>
+    <main></main>
     <script>
+      function setup(){
+        createCanvas(innerWidth, innerHeight);
+      }
+
+      function draw(){
+        background(220);
+      }
       {% fake.js %}
     </script>
-    <script src="./scripts/real.js"></script>
   </body>
 </html>
