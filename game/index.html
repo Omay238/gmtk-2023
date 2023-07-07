@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Roles Reversed</title>
         <style media="screen">
+            @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
             #editor {
                 position: absolute;
                 top: 0;
@@ -30,7 +35,7 @@
                 left: 50vw;
                 background: forestgreen;
                 color: white;
-                font-family: sans-serif;
+                font-family: 'Roboto Mono', monospace;
 
                 -webkit-user-select: none; /* Safari */
                 -ms-user-select: none; /* IE 10 and IE 11 */
@@ -54,21 +59,60 @@
                 bottom: 0;
                 left: 50vw;
             }
+
+            #top {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+
+                background: gray;
+                color: white;
+                font-family: 'Roboto Mono', monospace;
+                text-align: center;
+                z-index: 9999;
+            }
+
+            #exit{
+                position: absolute;
+                cursor: pointer;
+                background: lightgray;
+                box-shadow: black 0 0 10px;
+                width: 50vw;
+                left: 25vw;
+            }
+
+            #exit:hover{
+                background: darkgray;
+            }
+
+            .hidden {
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s 1s, opacity 1s linear;
+            }
         </style>
     </head>
 
     <body>
-    <div id="left">
-        <div id="editor"></div>
-    </div>
-    <div id="right">
-        <div id="bar">
-            <h1>Run</h1>
+        <div id="top">
+            <h1>Bug-fixing simulator</h1>
+            <p>This is my submission for the GMTK Game Jam 2023. The theme was "Roles Reversed," where you had to make the player play the part that they don't normally do. To play, you need some JavaScript knowledge, but not much experience. On the left, you edit the game code, on the right, you see the game window, and on the bottom right, you see the console. Errors will appear there.</p>
+            <img src="./assets/image/jamlogo2023.png" width="100%" alt="GMTK Game Jam 2023 logo">
+            <div id="exit" onclick="document.querySelector('#top').classList.add('hidden');">Ok</div>
         </div>
-        <iframe id="game"></iframe>
-        <div id="console"></div>
-    </div>
-    <script src="./libraries/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="script.js" type="module"></script>
+        <div id="left">
+            <div id="editor"></div>
+        </div>
+        <div id="right">
+            <div id="bar">
+                <h1>Run</h1>
+            </div>
+            <iframe id="game" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+            <div id="console"></div>
+        </div>
+        <script src="./libraries/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="script.js" type="module"></script>
     </body>
 </html>
