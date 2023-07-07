@@ -74,6 +74,11 @@
                 z-index: 9999;
             }
 
+            #top > p {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
             #exit{
                 position: absolute;
                 cursor: pointer;
@@ -81,16 +86,18 @@
                 box-shadow: black 0 0 10px;
                 width: 50vw;
                 left: 25vw;
+                transition: background-color 0s 0.1s, background-color 0.1s cubic-bezier(0.11, 0, 0.5, 0)
             }
 
             #exit:hover{
                 background: darkgray;
+                transition: background-color 0s 0.1s, background-color 0.1s cubic-bezier(0.11, 0, 0.5, 0)
             }
 
             .hidden {
                 visibility: hidden;
                 opacity: 0;
-                transition: visibility 0s 1s, opacity 1s linear;
+                transition: visibility 0s 0.5s, opacity 0.5s cubic-bezier(0.11, 0, 0.5, 0);
             }
         </style>
     </head>
@@ -99,8 +106,8 @@
         <div id="top">
             <h1>Bug-fixing simulator</h1>
             <p>This is my submission for the GMTK Game Jam 2023. The theme was "Roles Reversed," where you had to make the player play the part that they don't normally do. To play, you need some JavaScript knowledge, but not much experience. On the left, you edit the game code, on the right, you see the game window, and on the bottom right, you see the console. Errors will appear there.</p>
-            <img src="./assets/image/jamlogo2023.png" width="100%" alt="GMTK Game Jam 2023 logo">
-            <div id="exit" onclick="document.querySelector('#top').classList.add('hidden');">Ok</div>
+            <img src="./assets/image/jamlogo2023.png" height="60%" alt="GMTK Game Jam 2023 logo">
+            <div id="exit" onclick="document.querySelector('#top').classList.add('hidden');"><h1>Ok</h1></div>
         </div>
         <div id="left">
             <div id="editor"></div>
