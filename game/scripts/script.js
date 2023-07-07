@@ -11,7 +11,7 @@ await fetch("game.html").then(response => {
 	gameHTML = data;
 });
 
-await fetch("fake.js").then(response => {
+await fetch("./scripts/fake.js").then(response => {
 	return response.text();
 }).then(data => {
 	fakeJS = data;
