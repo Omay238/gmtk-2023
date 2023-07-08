@@ -107,3 +107,11 @@
 .error {
     color: red;
 }
+
+.log > *, .warn > *, .error > * {
+    display: inline-block;
+}
+
+.log:first-child, .warn:first-child, .error:first-child {
+    margin-right: 10px;
+}
