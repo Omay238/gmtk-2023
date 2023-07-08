@@ -50,6 +50,10 @@
     bottom: 0;
     left: 50vw;
     overflow: scroll;
+    background: #272822;
+    border-left: 5px solid white;
+
+    font-family: 'Roboto Mono', monospace;
 }
 
 #top {

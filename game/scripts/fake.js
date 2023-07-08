@@ -1,27 +1,86 @@
 let { Engine, Bodies, Composite, Body, Vector, Detector, Pairs } = Matter;
 
 console.log = (content) => {
-	let item = window.top.document.createElement("p");
-	item.classList.add("log");
-	item.innerText = content;
-	window.top.document.querySelector("#console").appendChild(item);
-	window.top.document.querySelector("#console").scrollTo(0, window.top.document.querySelector("#console").scrollHeight);
+	let doc = window.top.document;
+	let create = (content) => {
+		let container = doc.createElement("div");
+		let cont = doc.createElement("p");
+		let num = doc.createElement("p");
+		cont.innerText = content;
+		container.appendChild(num);
+		container.appendChild(cont);
+		container.classList.add("log");
+		doc.querySelector("#console").appendChild(container);
+	};
+	if(doc.querySelector("#console").lastChild !== null){
+		if(doc.querySelector("#console").lastChild.lastChild.innerText === content.toString()){
+			if(doc.querySelector("#console").lastChild.firstChild.innerText === ''){
+				doc.querySelector("#console").lastChild.firstChild.innerText = "2";
+			}else{
+				doc.querySelector("#console").lastChild.firstChild.innerText = parseInt(doc.querySelector("#console").lastChild.firstChild.innerText) + 1;
+			}
+		}else{
+			create(content);
+		}
+	}else{
+		create(content);
+	}
+	doc.querySelector("#console").scrollTo(0, doc.querySelector("#console").scrollHeight);
 };
 
 console.warn = (content) => {
-	let item = window.top.document.createElement("p");
-	item.classList.add("warn");
-	item.innerText = content;
-	window.top.document.querySelector("#console").appendChild(item);
-	window.top.document.querySelector("#console").scrollTo(0, window.top.document.querySelector("#console").scrollHeight);
+	let doc = window.top.document;
+	let create = (content) => {
+		let container = doc.createElement("div");
+		let cont = doc.createElement("p");
+		let num = doc.createElement("p");
+		cont.innerText = content;
+		container.appendChild(num);
+		container.appendChild(cont);
+		container.classList.add("warn");
+		doc.querySelector("#console").appendChild(container);
+	};
+	if(doc.querySelector("#console").lastChild !== null){
+		if(doc.querySelector("#console").lastChild.lastChild.innerText === content.toString()){
+			if(doc.querySelector("#console").lastChild.firstChild.innerText === ''){
+				doc.querySelector("#console").lastChild.firstChild.innerText = "2";
+			}else{
+				doc.querySelector("#console").lastChild.firstChild.innerText = parseInt(doc.querySelector("#console").lastChild.firstChild.innerText) + 1;
+			}
+		}else{
+			create(content);
+		}
+	}else{
+		create(content);
+	}
+	doc.querySelector("#console").scrollTo(0, doc.querySelector("#console").scrollHeight);
 };
 
 console.error = (content) => {
-	let item = window.top.document.createElement("p");
-	item.classList.add("error");
-	item.innerText = content;
-	window.top.document.querySelector("#console").appendChild(item);
-	window.top.document.querySelector("#console").scrollTo(0, window.top.document.querySelector("#console").scrollHeight);
+	let doc = window.top.document;
+	let create = (content) => {
+		let container = doc.createElement("div");
+		let cont = doc.createElement("p");
+		let num = doc.createElement("p");
+		cont.innerText = content;
+		container.appendChild(num);
+		container.appendChild(cont);
+		container.classList.add("error");
+		doc.querySelector("#console").appendChild(container);
+	};
+	if(doc.querySelector("#console").lastChild !== null){
+		if(doc.querySelector("#console").lastChild.lastChild.innerText === content.toString()){
+			if(doc.querySelector("#console").lastChild.firstChild.innerText === ''){
+				doc.querySelector("#console").lastChild.firstChild.innerText = "2";
+			}else{
+				doc.querySelector("#console").lastChild.firstChild.innerText = parseInt(doc.querySelector("#console").lastChild.firstChild.innerText) + 1;
+			}
+		}else{
+			create(content);
+		}
+	}else{
+		create(content);
+	}
 };
 
 // create an engine
