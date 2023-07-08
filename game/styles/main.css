@@ -49,6 +49,7 @@
     right: 0;
     bottom: 0;
     left: 50vw;
+    overflow: scroll;
 }
 
 #top {
@@ -89,4 +90,16 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.5s, opacity 0.5s cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+.log {
+    color: lightgray;
+}
+
+.warn {
+    color: yellow;
+}
+
+.error {
+    color: red;
 }
