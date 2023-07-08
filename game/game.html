@@ -22,7 +22,7 @@
 
       let { Engine, Bodies, Composite, Body, Vector, Detector } = Matter;
 
-      console.log1 = (content) => {
+      console.log = (content) => {
         let doc = window.top.document;
         let create = (content) => {
           let container = doc.createElement("div");
@@ -103,6 +103,7 @@
         }else{
           create(content);
         }
+        doc.querySelector("#console").scrollTo(0, doc.querySelector("#console").scrollHeight);
       };
 
       // create an engine
@@ -132,16 +133,25 @@
 
       function ithinkthisisimportant(){
         if(!moving){
-          console.error("Error: 'I can't move!!' - player\nLines 35-72");
+          console.error("Error: 'I can't move!!' - player\nLines 66-110");
         }
         if(levels[1][2] !== "2222222201" && level === 1){
-          console.error("Error: old level. Styling not up to date.\nLines 15-24");
+          console.error("Error: old level. Styling not up to date.\nLines 16-25");
         }
         if(tiles[0].pixels[0] === tiles[1].pixels[0]){
-          console.error("Error: ground tiles not properly sourced.\nLines 114 and 115");
+          console.error("Error: ground tiles not properly sourced.\nLines 118 and 119");
         }
         if(playerImage.pixels[2003] === 1){
-          console.error("Error: player image not loaded correctly.\nLine 112");
+          console.error("Error: player image not loaded correctly.\nLine 116");
+        }
+        let dumy = false;
+        for(let i = 0; i < levels[2].length; i++){
+          if(levels[2][i].length !== 10){
+            dumy = true;
+          }
+        }
+        if(dumy && level === 2){
+          console.error("Error: improper line lengths and ids.\nLines 31-40");
         }
       }
 

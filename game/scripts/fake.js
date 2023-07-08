@@ -11,6 +11,7 @@ let levels = [
 		"0020000000",
 		"2212222222"
 	],
+	//this is an old level. i should fix it (2's when 0 above, otherwise a 1)
 	[
 		"0000000001",
 		"0000000001",
@@ -23,20 +24,23 @@ let levels = [
 		"1111111100",
 		"0000000000"
 	],
+	//its bad to screw with the keyboard when coding
+	//it looks like all the numbers to remove are stuff that isnt 0 1 or 2
+	//just gotta remove those
 	[
-		"0000000000",
-		"0000000000",
-		"0000000022",
-		"0000000001",
-		'0000000201',
-		"0000000001",
-		"0000002001",
-		"0000000001",
-		"0000020001",
-		"0000000001"
+		"000003400000",
+		"000006400000",
+		"000460000022",
+		"00006000001",
+		'00000003201',
+		"000000005401",
+		"000460002001",
+		"000640000001",
+		"006400020001",
+		"00400000001"
 	],
 	[
-
+		" "
 	]
 ];
 
@@ -59,51 +63,51 @@ class Player{
 		//good thing i can use ctrl+/ on windows and linux
 		//or cmd+/ on mac
 		//developers note: (seamless hint, i know)
-		Body.setAngularSpeed(this.body, 0);
-		if(keys[37]){
-			Body.applyForce(this.body, this.body.position, Matter.Vector.create(-0.008, 0));
-		}
-		if(keys[39]){
-			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0.008, 0));
-		}
-		this.grounded = false;
-		let detector = Detector.create({bodies: [this.body].concat(groundBodies)});
-		let collisions = Detector.collisions(detector);
-		for(let pair of collisions){
-			if(pair.bodyA === this.body || pair.bodyB === this.body){
-				let otherBody = pair.bodyA === this.body ? pair.bodyB : pair.bodyA;
+// 		Body.setAngularSpeed(this.body, 0);
+// 		if(keys[37]){
+// 			Body.applyForce(this.body, this.body.position, Matter.Vector.create(-0.008, 0));
+// 		}
+// 		if(keys[39]){
+// 			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0.008, 0));
+// 		}
+// 		this.grounded = false;
+// 		let detector = Detector.create({bodies: [this.body].concat(groundBodies)});
+// 		let collisions = Detector.collisions(detector);
+// 		for(let pair of collisions){
+// 			if(pair.bodyA === this.body || pair.bodyB === this.body){
+// 				let otherBody = pair.bodyA === this.body ? pair.bodyB : pair.bodyA;
 
-				let thisBottom = this.body.bounds.max.y;
-				let otherTop = otherBody.bounds.min.y;
+// 				let thisBottom = this.body.bounds.max.y;
+// 				let otherTop = otherBody.bounds.min.y;
 
-				if(thisBottom >= otherTop - 1 && thisBottom <= otherTop + 1){
-					this.grounded = true;
-					this.groundedFrames++;
-					break;
-				}
-			}
-		}
+// 				if(thisBottom >= otherTop - 1 && thisBottom <= otherTop + 1){
+// 					this.grounded = true;
+// 					this.groundedFrames++;
+// 					break;
+// 				}
+// 			}
+// 		}
 
-		if(this.grounded === false){
-			this.groundedFrames = 0;
-		}
+// 		if(this.grounded === false){
+// 			this.groundedFrames = 0;
+// 		}
 
-		moving = true;
+// 		moving = true;
 
-		if(keys[38] && this.groundedFrames > 2){
-			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0, -0.14));
-		}
+// 		if(keys[38] && this.groundedFrames > 2){
+// 			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0, -0.14));
+// 		}
 
-		let velocityMod = Body.getVelocity(this.body);
-		let velocityUpdated = createVector(velocityMod.x * 0.9, velocityMod.y);
-		Body.setVelocity(this.body, Vector.create(velocityUpdated.x, velocityUpdated.y));
+// 		let velocityMod = Body.getVelocity(this.body);
+// 		let velocityUpdated = createVector(velocityMod.x * 0.9, velocityMod.y);
+// 		Body.setVelocity(this.body, Vector.create(velocityUpdated.x, velocityUpdated.y));
 
-		if(this.body.position.x > width && level < levels.length - 1){
-			level++;
-			loadLevel();
-		}else if(this.body.position.x > width){
-			won = true;
-		}
+// 		if(this.body.position.x > width && level < levels.length - 1){
+// 			level++;
+// 			loadLevel();
+// 		}else if(this.body.position.x > width){
+// 			won = true;
+// 		}
 	}
 }
 
@@ -112,7 +116,7 @@ function preload(){
 	playerImage = loadImage("./assets/image/err.png");
 	//ground tiles are numerically ordered i think
 	tiles.push(loadImage("./assets/image/1.png"));
-	tiles.push(loadImage("./assets/image/2.png"));
+	tiles.push(loadImage("./assets/image/1.png"));
 }
 
 function draw(){
