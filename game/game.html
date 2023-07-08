@@ -153,6 +153,10 @@
         if(dumy && level === 2){
           console.error("Error: improper line lengths and ids.\nLines 31-40");
         }
+        if(won){
+          window.top.document.querySelector("#end").style.display = "block";
+          window.top.document.querySelector("#end > video").play();
+        }
       }
 
       function keyPressed(){
