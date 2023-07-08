@@ -1,110 +1,44 @@
-let { Engine, Bodies, Composite, Body, Vector, Detector, Pairs } = Matter;
-
-console.log = (content) => {
-	let doc = window.top.document;
-	let create = (content) => {
-		let container = doc.createElement("div");
-		let cont = doc.createElement("p");
-		let num = doc.createElement("p");
-		cont.innerText = content;
-		container.appendChild(num);
-		container.appendChild(cont);
-		container.classList.add("log");
-		doc.querySelector("#console").appendChild(container);
-	};
-	if(doc.querySelector("#console").lastChild !== null){
-		if(doc.querySelector("#console").lastChild.lastChild.innerText === content.toString()){
-			if(doc.querySelector("#console").lastChild.firstChild.innerText === ''){
-				doc.querySelector("#console").lastChild.firstChild.innerText = "2";
-			}else{
-				doc.querySelector("#console").lastChild.firstChild.innerText = parseInt(doc.querySelector("#console").lastChild.firstChild.innerText) + 1;
-			}
-		}else{
-			create(content);
-		}
-	}else{
-		create(content);
-	}
-	doc.querySelector("#console").scrollTo(0, doc.querySelector("#console").scrollHeight);
-};
-
-console.warn = (content) => {
-	let doc = window.top.document;
-	let create = (content) => {
-		let container = doc.createElement("div");
-		let cont = doc.createElement("p");
-		let num = doc.createElement("p");
-		cont.innerText = content;
-		container.appendChild(num);
-		container.appendChild(cont);
-		container.classList.add("warn");
-		doc.querySelector("#console").appendChild(container);
-	};
-	if(doc.querySelector("#console").lastChild !== null){
-		if(doc.querySelector("#console").lastChild.lastChild.innerText === content.toString()){
-			if(doc.querySelector("#console").lastChild.firstChild.innerText === ''){
-				doc.querySelector("#console").lastChild.firstChild.innerText = "2";
-			}else{
-				doc.querySelector("#console").lastChild.firstChild.innerText = parseInt(doc.querySelector("#console").lastChild.firstChild.innerText) + 1;
-			}
-		}else{
-			create(content);
-		}
-	}else{
-		create(content);
-	}
-	doc.querySelector("#console").scrollTo(0, doc.querySelector("#console").scrollHeight);
-};
-
-console.error = (content) => {
-	let doc = window.top.document;
-	let create = (content) => {
-		let container = doc.createElement("div");
-		let cont = doc.createElement("p");
-		let num = doc.createElement("p");
-		cont.innerText = content;
-		container.appendChild(num);
-		container.appendChild(cont);
-		container.classList.add("error");
-		doc.querySelector("#console").appendChild(container);
-	};
-	if(doc.querySelector("#console").lastChild !== null){
-		if(doc.querySelector("#console").lastChild.lastChild.innerText === content.toString()){
-			if(doc.querySelector("#console").lastChild.firstChild.innerText === ''){
-				doc.querySelector("#console").lastChild.firstChild.innerText = "2";
-			}else{
-				doc.querySelector("#console").lastChild.firstChild.innerText = parseInt(doc.querySelector("#console").lastChild.firstChild.innerText) + 1;
-			}
-		}else{
-			create(content);
-		}
-	}else{
-		create(content);
-	}
-};
-
-// create an engine
-let engine = Engine.create();
-
-let player, playerImage;
-
-let keys = [];
-
 let levels = [
+	[
+		"0000000002",
+		"0000000001",
+		"0000000001",
+		"0000000201",
+		"0000002101",
+		"0000021101",
+		"0000211101",
+		"0000000000",
+		"0020000000",
+		"2212222222"
+	],
 	[
 		"0000000001",
 		"0000000001",
+		"1111111101",
 		"0000000001",
-		"0000000101",
-		"0000001101",
-		"0000011101",
-		"0000111101",
+		"0000000001",
+		"0111111111",
+		"0000000001",
+		"0000000001",
+		"1111111100",
+		"0000000000"
+	],
+	[
 		"0000000000",
-		"0010000000",
-		"1111111111"
+		"0000000000",
+		"0000000022",
+		"0000000001",
+		'0000000201',
+		"0000000001",
+		"0000002001",
+		"0000000001",
+		"0000020001",
+		"0000000001"
+	],
+	[
+
 	]
 ];
-let level = 0;
 
 class Player{
 	constructor(x, y, w, h, img){
@@ -117,12 +51,14 @@ class Player{
 	}
 
 	render(){
-		//console.log(this.body);
 		image(this.img, this.body.position.x, this.body.position.y, this.size.x, this.size.y);
-		//ellipse(this.pos.x, this.pos.y, 10, 10);
 	}
 
 	update(){
+		//im gonna have to uncomment the rest of this area at somepoint
+		//good thing i can use ctrl+/ on windows and linux
+		//or cmd+/ on mac
+		//developers note: (seamless hint, i know)
 		Body.setAngularSpeed(this.body, 0);
 		if(keys[37]){
 			Body.applyForce(this.body, this.body.position, Matter.Vector.create(-0.008, 0));
@@ -152,32 +88,31 @@ class Player{
 			this.groundedFrames = 0;
 		}
 
-		console.log(this.grounded);
+		moving = true;
 
 		if(keys[38] && this.groundedFrames > 2){
-			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0, -0.1));
+			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0, -0.14));
 		}
 
 		let velocityMod = Body.getVelocity(this.body);
 		let velocityUpdated = createVector(velocityMod.x * 0.9, velocityMod.y);
 		Body.setVelocity(this.body, Vector.create(velocityUpdated.x, velocityUpdated.y));
+
+		if(this.body.position.x > width && level < levels.length - 1){
+			level++;
+			loadLevel();
+		}else if(this.body.position.x > width){
+			won = true;
+		}
 	}
 }
 
 function preload(){
-	playerImage = loadImage("./assets/image/player.png");
-}
-
-let s;
-
-let groundBodies = [];
-
-function setup(){
-	let scl = min(innerWidth, innerHeight);
-	createCanvas(scl, scl);
-	loadLevel(level);
-	imageMode(CENTER);
-	rectMode(CENTER);
+	//i cant remember the filename... maybe something like player.png
+	playerImage = loadImage("./assets/image/err.png");
+	//ground tiles are numerically ordered i think
+	tiles.push(loadImage("./assets/image/1.png"));
+	tiles.push(loadImage("./assets/image/2.png"));
 }
 
 function draw(){
@@ -185,10 +120,10 @@ function draw(){
 
 	for(let i = 0; i < levels[level].length; i++){
 		for(let j = 0; j < levels[level][i].length; j++){
-			if(levels[level][i].charAt(j) == "1"){
+			if(levels[level][i].charAt(j) !== "0"){
 				noStroke();
 				fill(128);
-				rect(j * s + s / 2, i * s + s / 2, s, s);
+				image(tiles[parseInt(levels[level][i].charAt(j)) - 1], j * s + s / 2, i * s + s / 2, s, s);
 			}
 		}
 	}
@@ -197,16 +132,20 @@ function draw(){
 	player.update();
 
 	Engine.update(engine);
+
+	ithinkthisisimportant();
 }
 
 function loadLevel(){
+	Composite.clear(engine.world);
+
 	s = floor(min(width / levels[level][0].length, height / levels[level].length));
 	player = new Player(s, s, s, s * 2, playerImage);
 
 	let bodies = [];
 	for(let i = 0; i < levels[level].length; i++){
 		for(let j = 0; j < levels[level][i].length; j++){
-			if(levels[level][i].charAt(j) == "1"){
+			if(levels[level][i].charAt(j) !== "0"){
 				bodies.push(Bodies.rectangle(j * s + s / 2, i * s + s / 2, s, s, {isStatic: true}));
 			}
 		}
@@ -214,20 +153,11 @@ function loadLevel(){
 
 	groundBodies = bodies;
 
-	bodies.push(Bodies.rectangle(width / 2, -50, width, 50, {isStatic: true}));
-	bodies.push(Bodies.rectangle(width / 2, height + 50, width, 50, {isStatic: true}));
-	bodies.push(Bodies.rectangle(-50, height / 2, 50, height, {isStatic: true}));
-	bodies.push(Bodies.rectangle(width + 50, height / 2, 50, height, {isStatic: true}));
+	bodies.push(Bodies.rectangle(width / 2, -50, width, 100, {isStatic: true}));
+	bodies.push(Bodies.rectangle(width / 2, height + 50, width, 100, {isStatic: true}));
+	bodies.push(Bodies.rectangle(-50, height / 2, 100, height, {isStatic: true}));
 
 	bodies.push(player.body);
 
 	Composite.add(engine.world, bodies);
-}
-
-function keyPressed(){
-	keys[keyCode] = true;
-}
-
-function keyReleased(){
-	keys[keyCode] = false;
 }
