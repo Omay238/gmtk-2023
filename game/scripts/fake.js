@@ -99,8 +99,8 @@ let levels = [
 		"0000001101",
 		"0000011101",
 		"0000111101",
-		"0000000001",
-		"0010000001",
+		"0000000000",
+		"0010000000",
 		"1111111111"
 	]
 ];
@@ -175,9 +175,7 @@ let groundBodies = [];
 function setup(){
 	let scl = min(innerWidth, innerHeight);
 	createCanvas(scl, scl);
-	s = floor(min(width / levels[level][0].length, height / levels[level].length));
-	player = new Player(s, s, s, s * 2, playerImage);
-	loadLevel(0, s);
+	loadLevel(level);
 	imageMode(CENTER);
 	rectMode(CENTER);
 }
@@ -201,7 +199,10 @@ function draw(){
 	Engine.update(engine);
 }
 
-function loadLevel(level, s){
+function loadLevel(){
+	s = floor(min(width / levels[level][0].length, height / levels[level].length));
+	player = new Player(s, s, s, s * 2, playerImage);
+
 	let bodies = [];
 	for(let i = 0; i < levels[level].length; i++){
 		for(let j = 0; j < levels[level][i].length; j++){

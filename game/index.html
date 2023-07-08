@@ -19,7 +19,7 @@
             <p>Music: Varphi</p>
             <br>
             <img src="./assets/image/jamlogo2023.png" height="40%" alt="GMTK Game Jam 2023 logo">
-            <div id="exit" onclick="document.querySelector('#top').classList.add('hidden');"><h1>Ok</h1></div>
+            <div id="exit" onclick="document.querySelector('#top').classList.add('hidden');document.querySelector('#background').play();"><h1>Ok</h1></div>
         </div>
         <div id="left">
             <div id="editor"></div>
@@ -30,6 +30,7 @@
             </div>
             <iframe id="game"></iframe>
             <div id="console"></div>
+            <audio id="background" src="./assets/music/ambient.mp3" hidden></audio>
         </div>
         <script src="./libraries/ace/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="./scripts/script.js" type="module"></script>
