@@ -132,8 +132,6 @@ function preload(){
 
 	jump = loadSound("./assets/effect/jump.wav");
 	complete = loadSound("./assets/effect/complete.wav");
-	error = loadSound("./assets/effect/error.wav");
-
 }
 
 function draw(){
