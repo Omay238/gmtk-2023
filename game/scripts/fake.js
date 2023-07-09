@@ -40,17 +40,18 @@ let levels = [
 		"00400000001"
 	],
 	[
-		"0000001001",
-		"0000001001",
-		"0000100011",
+		"0000002000",
+		"0000001000",
+		"0000200022",
 		"0000100001",
-		"1000100101",
+		"2000100201",
 		"0000100001",
 		"0000100001",
-		"0001101001",
-		"0000100000",
-		"0000100000",
-	]
+		"0002102001",
+		"0000100001",
+		"0000100001",
+	],
+
 ];
 
 class Player{
@@ -105,6 +106,7 @@ class Player{
 
 // 		if(keys[38] && this.groundedFrames > 2){
 // 			Body.applyForce(this.body, this.body.position, Matter.Vector.create(0, -0.14));
+//          playSound(jump);
 // 		}
 
 // 		let velocityMod = Body.getVelocity(this.body);
@@ -114,6 +116,7 @@ class Player{
 // 		if(this.body.position.x > width && level < levels.length - 1){
 // 			level++;
 // 			loadLevel();
+//          playSound(complete);
 // 		}else if(this.body.position.x > width){
 // 			won = true;
 // 		}
@@ -126,6 +129,11 @@ function preload(){
 	//ground tiles are numerically ordered i think
 	tiles.push(loadImage("./assets/image/1.png"));
 	tiles.push(loadImage("./assets/image/1.png"));
+
+	jump = loadSound("./assets/effect/jump.wav");
+	complete = loadSound("./assets/effect/complete.wav");
+	error = loadSound("./assets/effect/error.wav");
+
 }
 
 function draw(){
